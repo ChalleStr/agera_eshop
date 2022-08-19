@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<!DOCTYPE html>
+<h1>Produkter</h2>
+
+
+
+<table>
+    <thead>
+        <tr>
+            <th scope="col">{{ labels is defined ? labels[0] : 'Artikelnamn' }}</th>
+            <th scope="col">{{ labels is defined ? labels[1] : 'Artikel-ID' }}</th>
+            <th scope="col">{{ labels is defined ? labels[2] : 'Pris (inkl. moms)' }}</th>
+            <th scope="col">{{ labels is defined ? labels[3] : 'I lager' }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in allArticles %}
+            <tr>
+                <td scope="row">
+                    Här ska artikel_benamning stå
+                </td>
+                <td scope="row">
+                    {{ product.id }}
+                </td>
+                <td>
+                    {% if product.momssats == 25 %}
+                        {{ product.pris * 1.25 }}
+                    {% else %}
+                        {{ product.pris * 1.06 }}
+                    {% endif %}
+                </td>
+
+                <td>
+                    {% if product.lagersaldo > 0 %}
+                        Finns i lager
+                    {% else %}
+                        Ej i lager
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
